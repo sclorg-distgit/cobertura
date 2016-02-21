@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.9.4.1
-Release:        9.14%{?dist}
+Release:        9.15%{?dist}
 Summary:        Java tool that calculates the percentage of code accessed by tests
 
 # ASL 2.0: src/net/sourceforge/cobertura/webapp/web.xml
@@ -40,7 +40,7 @@ BuildRequires:  %{?scl_prefix_java_common}tomcat-servlet-3.0-api
 BuildRequires:  %{?scl_prefix_java_common}xalan-j2
 BuildRequires:  %{?scl_prefix_java_common}xerces-j2
 BuildRequires:  %{?scl_prefix_java_common}xml-commons-apis
-BuildRequires:  maven30-groovy
+BuildRequires:  %{?scl_prefix}groovy
 
 Requires:       %{?scl_prefix_java_common}ant
 Requires:       %{?scl_prefix_java_common}jakarta-oro
@@ -63,7 +63,7 @@ This package contains the API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch0 -p1
 
@@ -74,7 +74,7 @@ sed -i 's/\r//' ChangeLog COPYING COPYRIGHT README
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 pushd lib
   ln -s $(build-classpath jaxen) .
@@ -101,7 +101,7 @@ export CLASSPATH=$(build-classpath objectweb-asm/asm-all commons-cli antlr-tool 
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF_SCL"}
+%{?scl:scl enable %{scl} - <<"EOF_SCL"}
 set -e -x
 # jars
 install -d -m 755 %{buildroot}%{_javadir}
@@ -137,6 +137,9 @@ cp -rp build/api/* %{buildroot}%{_javadocdir}/%{name}
 %{_javadocdir}/%{name}
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.9.4.1-9.15
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.9.4.1-9.14
 - maven33 rebuild
 
