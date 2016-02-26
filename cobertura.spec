@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.9.4.1
-Release:        9.15%{?dist}
+Release:        9.16%{?dist}
 Summary:        Java tool that calculates the percentage of code accessed by tests
 
 # ASL 2.0: src/net/sourceforge/cobertura/webapp/web.xml
@@ -137,6 +137,9 @@ cp -rp build/api/* %{buildroot}%{_javadocdir}/%{name}
 %{_javadocdir}/%{name}
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.9.4.1-9.16
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.9.4.1-9.15
 - maven33 rebuild #2
 
